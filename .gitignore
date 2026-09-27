@@ -1,0 +1,24 @@
+# Environment / secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+*.egg-info/
+
+# Collected visitor data - private, never commit
+database/*.db
+data/*.csv
+logs/*.log
+
+# Keep the folders themselves tracked
+!database/.gitkeep
+!data/.gitkeep
+!logs/.gitkeep
+
+# OS / editor cruft
+.DS_Store
+.vscode/
+.idea/

@@ -1,0 +1,489 @@
+/* ==========================================================================
+   Regional Insight Collector — Design System
+   Palette:  #05070d (void), #0c1120 (panel), #131a2e (panel-raised),
+             #4f8cff (signal blue), #7fd8ff (sky accent),
+             #e9edf5 (paper text), #8792a8 (muted text)
+   Type:     "Fraunces" for display headings, "Inter" for UI/body text.
+   Concept:  A satellite/atlas control-room aesthetic — like watching a
+             single point resolve on a dark globe.
+   ========================================================================== */
+
+:root {
+    --void: #05070d;
+    --panel: #0c1120;
+    --panel-raised: #131a2e;
+    --line: rgba(233, 237, 245, 0.08);
+    --signal: #4f8cff;
+    --sky: #7fd8ff;
+    --paper: #e9edf5;
+    --muted: #8792a8;
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--void);
+    color: var(--paper);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    min-height: 100%;
+}
+
+::selection {
+    background: var(--signal);
+    color: #fff;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* --------------------------------------------------------------------
+   Ambient background layers
+   -------------------------------------------------------------------- */
+
+.grid-mesh {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 40%, transparent 90%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 40%, transparent 90%);
+    pointer-events: none;
+}
+
+.glow-orb {
+    position: fixed;
+    z-index: 0;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+    opacity: 0.35;
+}
+
+.glow-orb--one {
+    width: 520px;
+    height: 520px;
+    top: -180px;
+    right: -160px;
+    background: radial-gradient(circle, var(--signal), transparent 70%);
+}
+
+.glow-orb--two {
+    width: 420px;
+    height: 420px;
+    bottom: -160px;
+    left: -140px;
+    background: radial-gradient(circle, var(--sky), transparent 70%);
+    opacity: 0.22;
+}
+
+/* --------------------------------------------------------------------
+   Landing page
+   -------------------------------------------------------------------- */
+
+.landing-shell {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 5rem 0;
+}
+
+.eyebrow-mark {
+    display: inline-block;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    color: var(--sky);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(127, 216, 255, 0.35);
+}
+
+.landing-heading {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.75rem, 6vw, 4.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.5rem;
+    color: var(--paper);
+}
+
+.landing-heading .line {
+    display: block;
+    overflow: hidden;
+}
+
+.landing-subtitle {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 30rem;
+    margin-bottom: 2.25rem;
+}
+
+.discover-form {
+    max-width: 26rem;
+    margin-bottom: 1.75rem;
+}
+
+.form-label-glass {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+}
+
+.input-glow-wrap {
+    margin-bottom: 1.1rem;
+}
+
+.form-control-glass {
+    background: rgba(19, 26, 46, 0.65);
+    border: 1px solid rgba(233, 237, 245, 0.14);
+    color: var(--paper);
+    border-radius: 12px;
+    padding: 0.9rem 1.1rem;
+    font-size: 1.05rem;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control-glass::placeholder {
+    color: rgba(135, 146, 168, 0.7);
+}
+
+.form-control-glass:focus {
+    background: rgba(19, 26, 46, 0.85);
+    border-color: var(--signal);
+    box-shadow: 0 0 0 4px rgba(79, 140, 255, 0.18);
+    color: var(--paper);
+}
+
+.btn-discover {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: linear-gradient(135deg, var(--signal), #3a6fd8);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.95rem 1.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    box-shadow: 0 12px 30px -10px rgba(79, 140, 255, 0.55);
+}
+
+.btn-discover .btn-arrow {
+    display: inline-flex;
+    transition: transform 0.25s ease;
+}
+
+.btn-discover:hover .btn-arrow,
+.btn-discover:focus-visible .btn-arrow {
+    transform: translateX(4px);
+}
+
+.btn-discover:focus-visible {
+    outline: 2px solid var(--sky);
+    outline-offset: 3px;
+}
+
+.privacy-note {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 28rem;
+    margin: 0;
+}
+
+.alert-glass {
+    background: rgba(255, 99, 99, 0.1);
+    border: 1px solid rgba(255, 99, 99, 0.35);
+    color: #ffb3b3;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+    max-width: 26rem;
+}
+
+/* --- Globe visual --- */
+
+.globe-stage {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+}
+
+#globeSvg {
+    display: block;
+}
+
+.pin-marker {
+    position: absolute;
+    top: 34%;
+    left: 58%;
+}
+
+.pin-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--sky);
+    box-shadow: 0 0 12px 2px rgba(127, 216, 255, 0.8);
+}
+
+.pin-pulse {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid var(--sky);
+    opacity: 0;
+}
+
+/* --------------------------------------------------------------------
+   Loading overlay
+   -------------------------------------------------------------------- */
+
+.loading-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5, 7, 13, 0.92);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.loading-overlay.is-active {
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.loading-inner {
+    text-align: center;
+}
+
+.loading-ring {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    border: 2px solid rgba(127, 216, 255, 0.2);
+    border-top-color: var(--sky);
+    animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-text {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+    margin: 0;
+}
+
+.dots span {
+    animation: blink 1.2s infinite;
+    opacity: 0;
+}
+
+.dots span:nth-child(2) { animation-delay: 0.2s; }
+.dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes blink {
+    0%, 20% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* --------------------------------------------------------------------
+   Experience page
+   -------------------------------------------------------------------- */
+
+.experience-shell {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 4rem 0;
+}
+
+.experience-eyebrow {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    color: var(--sky);
+    margin-bottom: 1.75rem;
+}
+
+.experience-card {
+    background: linear-gradient(180deg, rgba(19, 26, 46, 0.7), rgba(12, 17, 32, 0.7));
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    overflow: hidden;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.6);
+}
+
+.experience-media {
+    position: relative;
+    min-height: 320px;
+}
+
+.media-frame {
+    position: absolute;
+    inset: 0;
+}
+
+.regional-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.experience-info {
+    padding: 3rem 2.75rem;
+    display: flex;
+    align-items: center;
+}
+
+.info-inner {
+    width: 100%;
+}
+
+.welcome-heading {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+    line-height: 1.15;
+    margin-bottom: 1.75rem;
+}
+
+.name-highlight {
+    color: var(--sky);
+}
+
+.location-stack {
+    margin-bottom: 1.75rem;
+}
+
+.location-line {
+    margin: 0;
+    line-height: 1.35;
+}
+
+.location-city {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--paper);
+}
+
+.location-state {
+    font-size: 1.1rem;
+    color: var(--muted);
+}
+
+.location-country {
+    font-size: 0.95rem;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+}
+
+.experience-tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: rgba(233, 237, 245, 0.85);
+    border-left: 2px solid var(--signal);
+    padding-left: 1rem;
+    margin-bottom: 2.25rem;
+}
+
+.btn-return {
+    display: inline-flex;
+    align-items: center;
+    color: var(--sky);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid transparent;
+}
+
+.btn-return:hover {
+    border-bottom-color: var(--sky);
+}
+
+/* --------------------------------------------------------------------
+   Responsive adjustments
+   -------------------------------------------------------------------- */
+
+@media (max-width: 991.98px) {
+    .landing-shell,
+    .experience-shell {
+        padding: 3rem 0;
+    }
+
+    .experience-media {
+        min-height: 240px;
+    }
+
+    .experience-info {
+        padding: 2.25rem 1.5rem 2.5rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .landing-heading {
+        font-size: 2.4rem;
+    }
+
+    .btn-discover {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .experience-card {
+        border-radius: 18px;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}

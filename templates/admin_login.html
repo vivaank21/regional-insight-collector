@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel — Regional Insight Collector</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <style>
+        body.admin-page {
+            background: var(--void);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .admin-login-container {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .admin-card {
+            background: rgba(19, 26, 46, 0.8);
+            border: 1px solid rgba(233, 237, 245, 0.14);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+        }
+
+        .admin-heading {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--paper);
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-subtext {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .admin-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-form-label {
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .admin-form-control {
+            background: rgba(19, 26, 46, 0.65);
+            border: 1px solid rgba(233, 237, 245, 0.14);
+            color: var(--paper);
+            border-radius: 10px;
+            padding: 0.9rem 1.1rem;
+            font-size: 1rem;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .admin-form-control::placeholder {
+            color: rgba(135, 146, 168, 0.7);
+        }
+
+        .admin-form-control:focus {
+            background: rgba(19, 26, 46, 0.85);
+            border-color: var(--signal);
+            box-shadow: 0 0 0 4px rgba(79, 140, 255, 0.18);
+            outline: none;
+            color: var(--paper);
+        }
+
+        .admin-btn-login {
+            background: linear-gradient(135deg, var(--signal), #3a6fd8);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 0.95rem 1.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            box-shadow: 0 12px 30px -10px rgba(79, 140, 255, 0.55);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .admin-btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 40px -10px rgba(79, 140, 255, 0.7);
+        }
+
+        .admin-btn-login:active {
+            transform: translateY(0);
+        }
+
+        .admin-error {
+            background: rgba(255, 99, 99, 0.1);
+            border: 1px solid rgba(255, 99, 99, 0.35);
+            color: #ffb3b3;
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-footer-text {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
+        }
+
+        .admin-footer-text a {
+            color: var(--sky);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .admin-footer-text a:hover {
+            color: var(--signal);
+        }
+
+        .grid-mesh {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .glow-orb {
+            position: fixed;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="admin-page">
+
+    <div class="grid-mesh" aria-hidden="true"></div>
+    <div class="glow-orb glow-orb--one" aria-hidden="true"></div>
+    <div class="glow-orb glow-orb--two" aria-hidden="true"></div>
+
+    <div class="admin-login-container">
+        <div class="admin-card">
+            <h1 class="admin-heading">Admin Panel</h1>
+            <p class="admin-subtext">Enter password to view visitor analytics</p>
+
+            {% if error %}
+            <div class="admin-error">
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <form method="POST" action="{{ url_for('admin_login') }}">
+                <div class="admin-form-group">
+                    <label for="password" class="admin-form-label">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="admin-form-control"
+                        placeholder="Enter admin password"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <button type="submit" class="admin-btn-login">
+                    Access Dashboard
+                </button>
+            </form>
+
+            <p class="admin-footer-text">
+                <a href="{{ url_for('index') }}">← Back to main site</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
