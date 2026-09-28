@@ -61,7 +61,7 @@ class Config:
     # a load balancer, etc). Leave this False for local development so
     # that arbitrary client-supplied headers can never be used to spoof
     # an IP address.
-    TRUST_PROXY_HEADERS = os.environ.get("TRUST_PROXY_HEADERS", "False").lower() in (
+    TRUST_PROXY_HEADERS = os.environ.get("TRUST_PROXY_HEADERS", "True").lower() in (
         "1",
         "true",
         "yes",
